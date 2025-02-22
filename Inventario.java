@@ -12,12 +12,15 @@ public class Inventario {
     public void agregarProducto(ProductoBase p){
         productos.add(p);
     }
-    public void aplicarDescuentoPorCategoria(String categoria, double descuento) {
+    public void aplicarDescuentoPorCategoria(String categoria, double descuento) throws DescuentoInvalidoException {
+        if (descuento < 0 || descuento > 100){
+            throw new DescuentoInvalidoException();
+        }
         for (ProductoBase producto : productos) {
             if (producto.getCategoria().equalsIgnoreCase(categoria)) {
                 try {
-                    producto.aplicarDescuento(descuento);
-                } catch (DescuentoInvalidoException DIE) {
+                    producto.aplicarDescuento((producto.getPrecioBase() * descuento) / 100);
+                } catch (DescuentoInvalidoException e) {
                     System.out.println("No hay productos asociados a esa categoria");
                 }
             }

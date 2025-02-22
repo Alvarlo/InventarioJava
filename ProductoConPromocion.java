@@ -21,7 +21,7 @@ public class ProductoConPromocion extends ProductoBase implements IPromocion{
         if (porcentajeDescuento < 0 || porcentajeDescuento > 100) {
             throw new DescuentoInvalidoException();
         }
-        this.descuento = (precioBase * porcentajeDescuento) / 100;
+        aplicarDescuento(porcentajeDescuento);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class ProductoConPromocion extends ProductoBase implements IPromocion{
 
     @Override
     public double getPrecioFinal() {
-        return precioBase - descuento;
+        return getPrecioBase() - getDescuento();
     }
 }

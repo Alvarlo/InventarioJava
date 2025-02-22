@@ -1,10 +1,10 @@
 package Ra7AlvaroAranda.Ejercicios.Inventario;
 
 public abstract class ProductoBase {
-    protected String nombre;
-    protected String categoria;
-    protected double precioBase;
-    protected double descuento;
+    private String nombre;
+    private String categoria;
+    private double precioBase;
+    private double descuento;
 
     public ProductoBase(String nombre, String categoria, double precioBase) {
         this.nombre = nombre;

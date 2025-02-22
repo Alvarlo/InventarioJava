@@ -12,18 +12,19 @@ public class Producto extends ProductoBase implements IDescuento{
         if (porcentajeDescuento < 0 || porcentajeDescuento > 100) {
             throw new DescuentoInvalidoException();
         }
-        this.descuento = (precioBase * porcentajeDescuento) / 100;
+        aplicarDescuento((super.getPrecioBase() * porcentajeDescuento / 100));
     }
 
     @Override
     public void aplicarDescuentoPorcentajeMaximo(double porcentajeDescuento) throws DescuentoInvalidoException {
-        double maxDescuento = precioBase * 0.7; // Límite máximo del 70%
-        double descuentoAplicado = (precioBase * porcentajeDescuento) / 100;
-        this.descuento = Math.min(descuentoAplicado, maxDescuento);
+        if (porcentajeDescuento > 70) { //Porcentaje máximo del 70%
+            porcentajeDescuento = 70;
+        }
+        aplicarDescuentoPorcentual(porcentajeDescuento);
     }
 
     @Override
     public double getPrecioFinal() {
-        return precioBase - descuento;
+        return super.getPrecioBase() - super.getDescuento();
     }
 }
